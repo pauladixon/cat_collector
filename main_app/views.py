@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from .models import Cat
 
 
@@ -28,5 +28,9 @@ class CatDetail(DetailView):
   model = Cat
 
 class CatCreate(CreateView):
+  model = Cat
+  fields = '__all__'
+
+class CatUpdate(UpdateView):
   model = Cat
   fields = '__all__'

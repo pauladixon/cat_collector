@@ -13,4 +13,9 @@
     {% endif %}
   </div>
 </div>
+
+<div class="card-action">
+  <a href="{% url 'cats_update' cat.id %}">edit</a>
+</div>
+
 {% endblock %}
