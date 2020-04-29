@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Cat
 
 
@@ -33,4 +33,8 @@ class CatCreate(CreateView):
 
 class CatUpdate(UpdateView):
   model = Cat
-  fields = '__all__'
+  fields = ['name', 'description', 'age']
+
+class CatDelete (DeleteView):
+  model = Cat
+  success_url = '/cats/'
