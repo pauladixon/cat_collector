@@ -1,6 +1,12 @@
 from django.db import models
 from django.urls import reverse
 
+MEALS = (
+    ('B', 'breakfast'),
+    ('L', 'lunch'),
+    ('d', 'dinner')
+)
+
 class Cat(models.Model):
     name = models.CharField(max_length=100)
     breed = models.CharField(max_length=100)
@@ -12,3 +18,14 @@ class Cat(models.Model):
     
     def get_absolute_url(self):
         return reverse('cats_detail', kwargs={'pk': self.id})
+
+class Feeding(models.Model):
+    date = models.DateField()
+    meal = models.CharField(
+        max_length=1,
+        choices=MEALS,
+        default=MEALS[0][0]
+    )
+
+    def __str__(self):
+        return f"{self.get_meal_display()} on {self.date}"
