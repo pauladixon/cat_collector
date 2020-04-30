@@ -4,4 +4,4 @@ from .models import Feeding
 class FeedingForm(ModelForm):
     class Meta:
         model = Feeding
-        fields = ['data', 'meal']
+        fields = ['date', 'meal']

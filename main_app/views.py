@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Cat
-
+from .forms import FeedingForm
 
 # Define the home view
 def home(request):
@@ -24,8 +24,24 @@ class CatList(ListView):
 #   cat = Cat.objects.get(id=cat_id)
 #   return render(request, 'cats/detail.html', {'cat': cat})
 
-class CatDetail(DetailView):
-  model = Cat
+# class CatDetail(DetailView):
+#   model = Cat
+
+def cat_detail(request, pk):
+  cat = Cat.objects.get(id=pk)
+  feeding_form = FeedingForm()
+  return render(request, 'main_app/cat_detail.html', {
+    'cat': cat,
+    'feeding_form': feeding_form
+  })
+
+def add_feeding(request, pk):
+  form = FeedingForm(request.POST)
+  if form.is_valid():
+    new_feeding = form.save(commit=False)
+    new_feeding.cat_id = pk
+    new_feeding.save()
+  return redirect('cats_detail', pk=pk)
 
 class CatCreate(CreateView):
   model = Cat
