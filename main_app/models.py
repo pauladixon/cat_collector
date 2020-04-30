@@ -4,7 +4,7 @@ from django.urls import reverse
 MEALS = (
     ('B', 'breakfast'),
     ('L', 'lunch'),
-    ('d', 'dinner')
+    ('D', 'dinner')
 )
 
 class Cat(models.Model):
